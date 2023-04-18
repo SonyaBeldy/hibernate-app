@@ -5,6 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.sonyabeldy.hibernate.model.Person;
 
+import java.util.List;
+
 /**
  * Hello world!
  *
@@ -21,11 +23,11 @@ public class App
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 1);
-            System.out.println(person.getName());
-            System.out.println(person.getAge());
+            session.createQuery("delete from Person where age < 30").executeUpdate();
+
 
             session.getTransaction().commit();
+
         } finally {
             sessionFactory.close();
         }
